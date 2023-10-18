@@ -51,9 +51,9 @@ namespace Examination_work_Library
                         try
                         {
                             Console.WriteLine();
-                            Console.WriteLine("Введите логин:");
+                            Console.Write("Введите логин: ");
                             string login = Console.ReadLine();
-                            Console.WriteLine("Введите пароль:");
+                            Console.Write("Введите пароль: ");
                             string password = Console.ReadLine();
                             Console.WriteLine();
 
@@ -90,7 +90,15 @@ namespace Examination_work_Library
                                             {
                                                 Console.WriteLine();
                                                 Console.WriteLine("<<Книги в наличии>>");
-                                                //тут будет отображаться список книг
+                                                using(LibraryEntities1 db = new LibraryEntities1())
+                                                {
+                                                    var books = db.Books.ToList();
+                                                    Console.WriteLine("ID\tНазвание книги\tАвтор\tИздательство\tКол-во страниц\tЖанр\tГод издания\tЯвляется продолжением\tПрошлая книга\tСебествоимость\tЦена");
+                                                    foreach (var b in books)
+                                                    {
+                                                        Console.WriteLine($"{b.Id}\t{b.Name}\t{b.Author}\t{b.Publisher}\t{b.Page_count}\t{b.Jenre}\t{b.Publisher_year}\t{b.Is_continued}\t{b.Previous_book}\t{b.Cost_price}\t{b.Price}");
+                                                    }
+                                                }
                                                 Console.WriteLine();
                                                 Console.WriteLine("1 - Найти книгу.");
                                                 Console.WriteLine("2 - Добавить книгу.");
@@ -107,7 +115,39 @@ namespace Examination_work_Library
                                                     try
                                                     {
                                                         Console.WriteLine();
-                                                        // поиск книги в опции 0
+                                                        Console.Write("Введите ключевое слово для поиска: ");
+                                                        string keyword = Console.ReadLine().ToLower();
+
+                                                        Console.WriteLine();
+                                                        Console.WriteLine("Результаты поиска:");
+                                                        using (LibraryEntities1 db = new LibraryEntities1())
+                                                        {
+                                                            var matchingBooks = db.Books.Where(b =>
+                                                                b.Name.ToLower().Contains(keyword) ||
+                                                                b.Author.ToLower().Contains(keyword) ||
+                                                                b.Publisher.ToLower().Contains(keyword) ||
+                                                                b.Page_count.ToString().Contains(keyword) ||
+                                                                b.Jenre.ToLower().Contains(keyword) ||
+                                                                b.Publisher_year.ToString().Contains(keyword) ||
+                                                                b.Is_continued.ToLower().Contains(keyword) ||
+                                                                b.Previous_book.ToLower().Contains(keyword) ||
+                                                                b.Cost_price.ToLower().Contains(keyword) ||
+                                                                b.Price.ToLower().Contains(keyword)
+                                                            ).ToList();
+
+                                                            if (matchingBooks.Any())
+                                                            {
+                                                                Console.WriteLine("ID\tНазвание книги\tАвтор\tИздательство\tКол-во страниц\tЖанр\tГод издания\tЯвляется продолжением\tПрошлая книга\tСебестоимость\tЦена");
+                                                                foreach (var b in matchingBooks)
+                                                                {
+                                                                    Console.WriteLine($"{b.Id}\t{b.Name}\t{b.Author}\t{b.Publisher}\t{b.Page_count}\t{b.Jenre}\t{b.Publisher_year}\t{b.Is_continued}\t{b.Previous_book}\t{b.Cost_price}\t{b.Price}");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine("Ничего не найдено.");
+                                                            }
+                                                        }
                                                         Console.WriteLine();
                                                     }
                                                     catch (Exception ex)
@@ -123,7 +163,33 @@ namespace Examination_work_Library
                                                     try
                                                     {
                                                         Console.WriteLine();
-                                                        // добавление книги в опции 0
+                                                        using (LibraryEntities1 db = new LibraryEntities1())
+                                                        {
+                                                            Console.Write("Введите название книги: ");
+                                                            string name = Console.ReadLine();
+                                                            Console.Write("Введите автора книги: ");
+                                                            string author = Console.ReadLine();
+                                                            Console.Write("Введите издателя книги: ");
+                                                            string publisher = Console.ReadLine();
+                                                            Console.Write("Введите количество страниц книги: ");
+                                                            int count = Convert.ToInt32(Console.ReadLine());
+                                                            Console.Write("Введите жанр книги: ");
+                                                            string jenre = Console.ReadLine();
+                                                            Console.Write("Введите год издания книги: ");
+                                                            int year = Convert.ToInt32(Console.ReadLine());
+                                                            Console.Write("Является ли книга продолжением другой книги?(Да/нет): ");
+                                                            string ic = Console.ReadLine();
+                                                            Console.Write("В случае если в прошлом поле вы введи ДА, то введите название предыдущей книги этой серии, если нет, то введите - : ");
+                                                            string pb = Console.ReadLine();
+                                                            Console.Write("Введите себестоимость книги: ");
+                                                            string cp = Console.ReadLine();
+                                                            Console.Write("Введите цену: ");
+                                                            string price = Console.ReadLine();
+
+                                                            Books books = new Books { Name = $"{name}", Author = $"{author}", Publisher = $"{publisher}", Page_count = count, Jenre = $"{jenre}", Publisher_year = year, Is_continued = $"{ic}", Previous_book = $"{pb}", Cost_price = $"{cp}", Price = $"{price}" };
+                                                            db.Books.Add(books);
+                                                            db.SaveChanges();
+                                                        }
                                                         Console.WriteLine();
                                                     }
                                                     catch (Exception ex)
@@ -139,8 +205,52 @@ namespace Examination_work_Library
                                                     try
                                                     {
                                                         Console.WriteLine();
-                                                        // редактирование книги в опции 0
+                                                        Console.Write("Введите ID книги для редактирования: ");
+                                                        int Id = Convert.ToInt32(Console.ReadLine());
+
+                                                        Console.Write("Введите значение для замены: ");
+                                                        string old_value = Console.ReadLine();
+
+                                                        Console.Write("Введите новое значение: ");
+                                                        Console.WriteLine("Подсказка: внимательно проверяйте корректность значений, во избежание замены не тех значений.");
+                                                        string new_value = Console.ReadLine();
                                                         Console.WriteLine();
+
+                                                        using (LibraryEntities1 db = new LibraryEntities1())
+                                                        {
+                                                            var book = db.Books.FirstOrDefault(b => b.Id == Id);
+
+                                                            if (book != null)
+                                                            {
+
+                                                                if (int.TryParse(old_value, out int intOldValue))
+                                                                {
+                                                                    if (book.Page_count == intOldValue) book.Page_count = Convert.ToInt32(new_value);
+                                                                    if (book.Publisher_year == intOldValue) book.Publisher_year = Convert.ToInt32(new_value);
+                                                                }
+                                                                else
+                                                                {
+
+                                                                    Console.WriteLine("Ошибка: введено некорректное значение для замены.");
+                                                                }
+
+                                                                if (book.Name == old_value) book.Name = new_value;
+                                                                if (book.Author == old_value) book.Author = new_value;
+                                                                if (book.Publisher == old_value) book.Publisher = new_value;
+                                                                if (book.Jenre == old_value) book.Jenre = new_value;
+                                                                if (book.Is_continued == old_value) book.Is_continued = new_value;
+                                                                if (book.Previous_book == old_value) book.Previous_book = new_value;
+                                                                if (book.Cost_price == old_value) book.Cost_price = new_value;
+                                                                if (book.Price == old_value) book.Price = new_value;
+
+                                                                db.SaveChanges();
+                                                                Console.WriteLine("Запись успешно обновлена.");
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine("Книга с указанным ID не найдена.");
+                                                            }
+                                                        }
                                                     }
                                                     catch (Exception ex)
                                                     {
@@ -155,7 +265,33 @@ namespace Examination_work_Library
                                                     try
                                                     {
                                                         Console.WriteLine();
-                                                        // удаление книги в опции 0
+                                                        Console.Write("Введите ID книги для удаления: ");
+                                                        int Id = Convert.ToInt32(Console.ReadLine());
+
+                                                        using (LibraryEntities1 db = new LibraryEntities1())
+                                                        {
+                                                            var bookToDelete = db.Books.FirstOrDefault(b => b.Id == Id);
+
+                                                            if (bookToDelete != null)
+                                                            {
+                                                                db.Books.Remove(bookToDelete);
+                                                                db.SaveChanges();
+                                                                Console.WriteLine($"Книга с ID {Id} успешно удалена.");
+
+                                                               
+                                                                var booksToUpdate = db.Books.Where(b => b.Id > Id).ToList();
+                                                                foreach (var book in booksToUpdate)
+                                                                {
+                                                                    book.Id--;  
+                                                                }
+
+                                                                db.SaveChanges();
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"Книга с ID {Id} не найдена.");
+                                                            }
+                                                        }
                                                         Console.WriteLine();
                                                     }
                                                     catch (Exception ex)
@@ -612,7 +748,15 @@ namespace Examination_work_Library
                                             {
                                                 Console.WriteLine();
                                                 Console.WriteLine("<<Новинки>>");
-                                                //тут будет отображаться список книг
+                                                using (LibraryEntities1 db = new LibraryEntities1())
+                                                {
+                                                    var books = db.New_books.ToList();
+                                                    Console.WriteLine("ID\tНазвание книги\tАвтор\tИздательство\tКол-во страниц\tЖанр\tГод издания\tЯвляется продолжением\tПрошлая книга\tСебествоимость\tЦена");
+                                                    foreach (var b in books)
+                                                    {
+                                                        Console.WriteLine($"{b.Id}\t{b.Name}\t{b.Author}\t{b.Publisher}\t{b.Page_count}\t{b.Jenre}\t{b.Publisher_year}\t{b.Is_continued}\t{b.Previous_book}\t{b.Cost_price}\t{b.Price}");
+                                                    }
+                                                }
                                                 Console.WriteLine();
                                                 Console.WriteLine("1 - Найти книгу.");
                                                 Console.WriteLine("2 - Добавить книгу.");
@@ -716,7 +860,15 @@ namespace Examination_work_Library
                                             {
                                                 Console.WriteLine();
                                                 Console.WriteLine("<<Популярные книги>>");
-                                                //тут будет отображаться список книг
+                                                using (LibraryEntities1 db = new LibraryEntities1())
+                                                {
+                                                    var books = db.Popular_books.ToList();
+                                                    Console.WriteLine("ID\tНазвание книги\tАвтор\tИздательство\tКол-во страниц\tЖанр\tГод издания\tЯвляется продолжением\tПрошлая книга\tСебествоимость\tЦена");
+                                                    foreach (var b in books)
+                                                    {
+                                                        Console.WriteLine($"{b.Id}\t{b.Name}\t{b.Author}\t{b.Publisher}\t{b.Page_count}\t{b.Jenre}\t{b.Publisher_year}\t{b.Is_continued}\t{b.Previous_book}\t{b.Cost_price}\t{b.Price}");
+                                                    }
+                                                }
                                                 Console.WriteLine();
                                                 Console.WriteLine("1 - Найти книгу.");
                                                 Console.WriteLine("2 - Добавить книгу.");

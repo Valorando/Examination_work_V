@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Page_count" Type="int" Nullable="false" />
+          <Property Name="Jenre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher_year" Type="int" Nullable="false" />
+          <Property Name="Is_continued" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Previous_book" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cost_price" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Discounted_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Page_count" Type="int" Nullable="false" />
+          <Property Name="Jenre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher_year" Type="int" Nullable="false" />
+          <Property Name="Is_continued" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Previous_book" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Old_price" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="New_price" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Discount" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="New_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Page_count" Type="int" Nullable="false" />
+          <Property Name="Jenre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher_year" Type="int" Nullable="false" />
+          <Property Name="Is_continued" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Previous_book" Type="nvarchar(max)" />
+          <Property Name="Cost_price" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Popular_authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Jenre" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Popular_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Page_count" Type="int" Nullable="false" />
+          <Property Name="Jenre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher_year" Type="int" Nullable="false" />
+          <Property Name="Is_continued" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Previous_book" Type="nvarchar(max)" />
+          <Property Name="Cost_price" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Popular_jenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Jenre" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reserved_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher_year" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Buyer" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sold_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher_year" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Buyer" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Written_off_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Publisher_year" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cause" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Хранилище LibraryModelContainer">
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discounted_books" EntityType="Self.Discounted_books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="New_books" EntityType="Self.New_books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Popular_authors" EntityType="Self.Popular_authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Popular_books" EntityType="Self.Popular_books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Popular_jenre" EntityType="Self.Popular_jenre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserved_books" EntityType="Self.Reserved_books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sold_books" EntityType="Self.Sold_books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Written_off_books" EntityType="Self.Written_off_books" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Page_count" Type="Int32" Nullable="false" />
+          <Property Name="Jenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher_year" Type="Int32" Nullable="false" />
+          <Property Name="Is_continued" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Previous_book" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost_price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Discounted_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Page_count" Type="Int32" Nullable="false" />
+          <Property Name="Jenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher_year" Type="Int32" Nullable="false" />
+          <Property Name="Is_continued" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Previous_book" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Old_price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="New_price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="New_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Page_count" Type="Int32" Nullable="false" />
+          <Property Name="Jenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher_year" Type="Int32" Nullable="false" />
+          <Property Name="Is_continued" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Previous_book" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cost_price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Popular_authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Jenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Popular_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Page_count" Type="Int32" Nullable="false" />
+          <Property Name="Jenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher_year" Type="Int32" Nullable="false" />
+          <Property Name="Is_continued" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Previous_book" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cost_price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Popular_jenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Jenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reserved_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher_year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Buyer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sold_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher_year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Buyer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Written_off_books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher_year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cause" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="LibraryEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Books" />
+          <EntitySet Name="Discounted_books" EntityType="Self.Discounted_books" />
+          <EntitySet Name="New_books" EntityType="Self.New_books" />
+          <EntitySet Name="Popular_authors" EntityType="Self.Popular_authors" />
+          <EntitySet Name="Popular_books" EntityType="Self.Popular_books" />
+          <EntitySet Name="Popular_jenre" EntityType="Self.Popular_jenre" />
+          <EntitySet Name="Reserved_books" EntityType="Self.Reserved_books" />
+          <EntitySet Name="Sold_books" EntityType="Self.Sold_books" />
+          <EntitySet Name="Written_off_books" EntityType="Self.Written_off_books" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище LibraryModelContainer" CdmEntityContainer="LibraryEntities1">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="LibraryModel.Books">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Page_count" ColumnName="Page_count" />
+                <ScalarProperty Name="Jenre" ColumnName="Jenre" />
+                <ScalarProperty Name="Publisher_year" ColumnName="Publisher_year" />
+                <ScalarProperty Name="Is_continued" ColumnName="Is_continued" />
+                <ScalarProperty Name="Previous_book" ColumnName="Previous_book" />
+                <ScalarProperty Name="Cost_price" ColumnName="Cost_price" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounted_books">
+            <EntityTypeMapping TypeName="LibraryModel.Discounted_books">
+              <MappingFragment StoreEntitySet="Discounted_books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Page_count" ColumnName="Page_count" />
+                <ScalarProperty Name="Jenre" ColumnName="Jenre" />
+                <ScalarProperty Name="Publisher_year" ColumnName="Publisher_year" />
+                <ScalarProperty Name="Is_continued" ColumnName="Is_continued" />
+                <ScalarProperty Name="Previous_book" ColumnName="Previous_book" />
+                <ScalarProperty Name="Old_price" ColumnName="Old_price" />
+                <ScalarProperty Name="New_price" ColumnName="New_price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="New_books">
+            <EntityTypeMapping TypeName="LibraryModel.New_books">
+              <MappingFragment StoreEntitySet="New_books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Page_count" ColumnName="Page_count" />
+                <ScalarProperty Name="Jenre" ColumnName="Jenre" />
+                <ScalarProperty Name="Publisher_year" ColumnName="Publisher_year" />
+                <ScalarProperty Name="Is_continued" ColumnName="Is_continued" />
+                <ScalarProperty Name="Previous_book" ColumnName="Previous_book" />
+                <ScalarProperty Name="Cost_price" ColumnName="Cost_price" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Popular_authors">
+            <EntityTypeMapping TypeName="LibraryModel.Popular_authors">
+              <MappingFragment StoreEntitySet="Popular_authors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Jenre" ColumnName="Jenre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Popular_books">
+            <EntityTypeMapping TypeName="LibraryModel.Popular_books">
+              <MappingFragment StoreEntitySet="Popular_books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Page_count" ColumnName="Page_count" />
+                <ScalarProperty Name="Jenre" ColumnName="Jenre" />
+                <ScalarProperty Name="Publisher_year" ColumnName="Publisher_year" />
+                <ScalarProperty Name="Is_continued" ColumnName="Is_continued" />
+                <ScalarProperty Name="Previous_book" ColumnName="Previous_book" />
+                <ScalarProperty Name="Cost_price" ColumnName="Cost_price" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Popular_jenre">
+            <EntityTypeMapping TypeName="LibraryModel.Popular_jenre">
+              <MappingFragment StoreEntitySet="Popular_jenre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Jenre" ColumnName="Jenre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserved_books">
+            <EntityTypeMapping TypeName="LibraryModel.Reserved_books">
+              <MappingFragment StoreEntitySet="Reserved_books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Publisher_year" ColumnName="Publisher_year" />
+                <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sold_books">
+            <EntityTypeMapping TypeName="LibraryModel.Sold_books">
+              <MappingFragment StoreEntitySet="Sold_books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Publisher_year" ColumnName="Publisher_year" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Written_off_books">
+            <EntityTypeMapping TypeName="LibraryModel.Written_off_books">
+              <MappingFragment StoreEntitySet="Written_off_books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Publisher_year" ColumnName="Publisher_year" />
+                <ScalarProperty Name="Cause" ColumnName="Cause" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
